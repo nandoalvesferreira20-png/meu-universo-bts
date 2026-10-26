@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Saídas geradas de testes e cache de pacotes não são código do projeto.
+    "test-artifacts/**",
+    ".npm-cache/**",
   ]),
 ]);
 

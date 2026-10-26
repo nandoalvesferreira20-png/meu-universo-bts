@@ -1,69 +1,98 @@
-import Image from "next/image";
-
+import Link from "next/link";
+import { ArrowRight, Heart, Ticket } from "lucide-react";
+import { HeroSection } from "@/components/hero-section";
+import { ExperienceCard, SectionHeader } from "@/components/experience";
+import { experiences, partnerUrl } from "@/data/portal";
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <HeroSection />
+      <section id="experiencias" className="container section">
+        <div className="section-title-row">
+          <SectionHeader
+            eyebrow="SEU PRÓXIMO DESTINO"
+            title="Qual memória vamos criar hoje?"
+            description="Um só lugar. Muitas formas de viver essa conexão."
+          />
+          <span className="section-side">EXPLORE O NOSSO UNIVERSO ↙</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+        <div className="experience-grid">
+          {experiences.map((experience, index) => (
+            <ExperienceCard
+              key={experience.href}
+              experience={experience}
+              index={index}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          ))}
         </div>
-      </main>
-    </div>
+        <p className="development-note">
+          ● Army Pass disponível. As outras experiências estão em
+          desenvolvimento.
+        </p>
+      </section>
+      <section className="container tour-section">
+        <div className="tour-art" aria-hidden="true">
+          <div className="ticket">
+            <Ticket size={34} strokeWidth={1} />
+            <span>
+              THE MOMENT
+              <br />
+              BECOMES A<br />
+              <em>MEMORY.</em>
+            </span>
+            <div className="ticket-rule" />
+            <small>ARIRANG TOUR — BRASIL</small>
+          </div>
+          <span className="art-star">✦</span>
+          <span className="tour-art-note">EU ESTIVE AQUI. EU SENTI TUDO.</span>
+        </div>
+        <div className="tour-copy">
+          <span className="eyebrow">ARIRANG TOUR</span>
+          <h2>
+            Alguns momentos
+            <br />
+            merecem ficar
+            <br />
+            <em>para sempre.</em>
+          </h2>
+          <p>
+            A emoção do primeiro acorde. O brilho dos lightsticks. A voz que se
+            encontra com tantas outras.
+          </p>
+          <p>
+            Um espaço para guardar suas experiências nos shows e cinemas — e
+            reviver tudo em comunidade.
+          </p>
+          <Link className="button button-primary" href="/arirang-tour">
+            Conhecer a galeria <ArrowRight size={17} />
+          </Link>
+          <span className="small-note">
+            Compartilhamento de fotos disponível em uma próxima fase.
+          </span>
+        </div>
+      </section>
+      <section className="community-section">
+        <div className="container community-inner">
+          <Heart size={38} strokeWidth={1} />
+          <span className="eyebrow">FEITO EM COMUNIDADE</span>
+          <h2>
+            Quando a gente se encontra,
+            <br />
+            <em>o universo fica maior.</em>
+          </h2>
+          <p>
+            O Army Pass Brasil nasce da vontade de transformar carinho em
+            conexão. Um projeto independente feito por fãs, em colaboração com{" "}
+            <a href={partnerUrl} target="_blank" rel="noreferrer">
+              @meuuniversobts ↗
+            </a>
+            .
+          </p>
+          <Link className="text-link" href="/sobre">
+            Conheça a nossa história <ArrowRight size={17} />
+          </Link>
+        </div>
+      </section>
+    </>
   );
 }

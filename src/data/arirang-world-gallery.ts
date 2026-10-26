@@ -1,0 +1,88 @@
+import type { GalleryPhoto } from "@/features/arirang-tour/event-carousel";
+
+export const worldTourPhotos: GalleryPhoto[] = [
+  {
+    id: "world-tour-01",
+    src: "/images/arirang-tour/world-tour/goyang-tour01.jpg",
+    width: 1200,
+    height: 800,
+    alt: "BTS no palco com iluminação vermelha e fumaça.",
+  },
+  {
+    id: "world-tour-02",
+    src: "/images/arirang-tour/world-tour/tour-02-tokyo.webp",
+    width: 1170,
+    height: 780,
+    alt: "Integrantes do BTS em performance, com chamas ao fundo.",
+  },
+  {
+    id: "world-tour-03",
+    src: "/images/arirang-tour/world-tour/tour-03-tokyo-stage.webp",
+    width: 1200,
+    height: 800,
+    alt: "Vista ampla de um palco iluminado em azul, com fogos acima do estádio.",
+  },
+  {
+    id: "world-tour-04",
+    src: "/images/arirang-tour/world-tour/tour-04-london.jpg",
+    width: 2000,
+    height: 1333,
+    alt: "BTS nos telões de um estádio diante da plateia.",
+  },
+  {
+    id: "world-tour-05",
+    src: "/images/arirang-tour/world-tour/tour-05-buenos-aires.jpg",
+    width: 1600,
+    height: 1067,
+    alt: "BTS em coreografia no palco diante do público.",
+  },
+  {
+    id: "world-tour-06",
+    src: "/images/arirang-tour/world-tour/tour-06-bogota.webp",
+    width: 1200,
+    height: 750,
+    alt: "Integrantes do BTS no palco sob chuva de confetes.",
+  },
+  {
+    id: "world-tour-07",
+    src: "/images/arirang-tour/world-tour/tour-07-madrid.jpg",
+    width: 1920,
+    height: 1081,
+    alt: "Panorama de um estádio com telões e luzes da plateia.",
+  },
+  {
+    id: "world-tour-08",
+    src: "/images/arirang-tour/world-tour/tour-08-paris-swim.jpg",
+    width: 1920,
+    height: 1081,
+    alt: "Vista do palco e da plateia sob luz azul e confetes.",
+  },
+  {
+    id: "world-tour-09",
+    src: "/images/arirang-tour/world-tour/tour-09-mexico.jpg",
+    width: 1289,
+    height: 860,
+    alt: "Vista ampla do palco e da plateia com efeitos de luz vermelha.",
+  },
+  {
+    id: "world-tour-10",
+    src: "/images/arirang-tour/world-tour/tour-10-los-angeles.jpg",
+    width: 1200,
+    height: 801,
+    alt: "Performance do BTS em um palco com telão azul.",
+  },
+  {
+    id: "world-tour-11",
+    src: "/images/arirang-tour/world-tour/tour-11-paris-stadium.jpg",
+    width: 1920,
+    height: 1080,
+    alt: "Vista panorâmica da plateia em um estádio durante o dia.",
+  },
+  {
+    id: "world-tour-12",
+    src: "/images/arirang-tour/world-tour/tour-12-los",
+    width: 3000,
+    height: 2001,
+    alt: "Integrantes do BTS juntos no palco, com o público ao fundo.",
+  },
+];

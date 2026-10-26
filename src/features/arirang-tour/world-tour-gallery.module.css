@@ -1,0 +1,24 @@
+.section {
+  margin-block: 56px;
+  padding-block: 36px;
+  border-block: 1px solid #ded6d0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .section [aria-roledescription="slide"] img {
+    animation: reveal 180ms ease-out;
+  }
+}
+@keyframes reveal {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (max-width: 760px) {
+  .section {
+    margin-block: 36px;
+    padding-block: 28px;
+  }
+}

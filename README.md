@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ARMY PASS BRASIL
 
-## Getting Started
+Portal independente da comunidade ARMY brasileira, em colaboração com [@meuuniversobts](https://www.instagram.com/meuuniversobts/). A Fase 2.5 oferece WINGS, MAP OF THE SOUL: 7, MAP OF THE SOUL: PERSONA e ARIRANG reconstruídos das referências fornecidas, fotografias independentes, recorte, prévia e PNG 1080 × 1920.
 
-First, run the development server:
+**Estado atual:** [ARIRANG claro](docs/army-pass-phase-2.5-light.md), com [logos originais incorporados](docs/arirang-logo-fix.md): três símbolos ARIRANG e marca preta BTS fornecidos pelo usuário. Papel marfim, molduras vermelhas, dados, fotos e frase autoral foram preservados. WINGS, MAP OF THE SOUL: 7 e PERSONA permanecem intactos. A lista pública continua com quatro eras; BE permanece oculto internamente.
 
-```bash
+A [Fase 2.1 — Army Pass Studio](docs/army-pass-phase-2.1.md) redesenha a interface e os quatro passaportes, preservando o fluxo e a exportação. Inclui 24 testes de navegador em desktop/tablet/mobile e configuração de logos oficiais **pendentes de autorização**. Fontes e instruções em [pesquisa de identidades](docs/era-logo-research.md).
+
+Leia [o guia da Fase 2](docs/army-pass-phase-2.md) para os componentes, inserção de fotografias autorizadas, privacidade e funcionamento da exportação. [Resultados de validação](docs/validation-phase-2.md) incluem os limites dos testes sem navegador conectado.
+
+A [correção de CSS Modules](docs/army-pass-css-fix.md) documenta o defeito visual reproduzido e sua correção, com testes reais no Edge em desktop e mobile emulado. Para executar essa regressão: `npm run test:browser` (constrói e serve o projeto na porta 3100).
+
+## Executar localmente
+
+Requer Node.js compatível com Next.js 16 (20.9 ou superior) e npm.
+
+```sh
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra http://localhost:3000. No PowerShell com bloqueio de scripts, use `npm.cmd` no lugar de `npm`. Não são necessárias credenciais, serviços externos nem arquivos `.env` nesta fase. As fontes usam a pilha local do sistema, sem download no build.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+npm run lint
+npm run typecheck
+npm run build
+npm run start
+npm run format:check
+npm test
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`start` executa o build de produção em http://localhost:3000. Hospedagem planejada: Vercel. Nenhum deploy foi realizado.
 
-## Learn More
+## Rotas
 
-To learn more about Next.js, take a look at the following resources:
+| Rota                      | Estado na Fase 1                                                                                      |
+| ------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `/`                       | Home com seis experiências, parceria e apresentação da galeria                                        |
+| `/army-pass`              | Gerador funcional: quatro eras, arte/foto local, recorte, download PNG e Web Share quando suportado   |
+| `/mural`                  | Mural com publicação filtrada, denúncias e proteção Turnstile; requer configuração Supabase/Turnstile |
+| `/admin/mural`            | Moderação autenticada por Supabase Auth e papel `app_metadata`; requer configuração                   |
+| `/jogos`                  | Central de jogos                                                                                      |
+| `/jogos/emojis`           | Apresentação do desafio em desenvolvimento                                                            |
+| `/jogos/quiz`             | Oito categorias navegáveis                                                                            |
+| `/jogos/quiz/[categoria]` | `bts`, `rm`, `jin`, `suga`, `j-hope`, `jimin`, `v`, `jung-kook`; sem partidas simuladas               |
+| `/historia`               | Estrutura da futura linha do tempo; conteúdo histórico em curadoria                                   |
+| `/arirang-tour`           | Galeria vazia; sem uploads ou fotos fictícias                                                         |
+| `/sobre`                  | Projeto, colaboração e independência                                                                  |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Categorias desconhecidas exibem a página 404. Layout de carregamento compartilhado e página de erro recuperável incluídos.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Arquitetura e arquivos
 
-## Deploy on Vercel
+- `src/app`: rotas, metadados, layout raiz, carregamento, erros e tokens/estilos globais com Tailwind CSS 4.
+- `src/components/shell.tsx`: Header, Footer e marca; `mobile-navigation.tsx`: menu com estado, Escape e retorno de foco.
+- `src/components/hero-section.tsx`: HeroSection.
+- `src/components/experience.tsx`: ExperienceCard, SectionHeader, EmptyState, PurplePassCard, QuizCategoryCard, MessageCard, GalleryCard e TimelineSection.
+- `src/features/experience-page.tsx`: estrutura compartilhada das páginas internas. Futuras funcionalidades podem receber diretórios próprios aqui.
+- `src/data/portal.ts`: navegação, experiências e categorias estáticas. Perguntas e linha do tempo deverão receber arquivos estruturados revisados antes de sua publicação.
+- `src/features/army-pass`: gerador local, templates, temas, seleção de imagens, recorte e exportação.
+- `src/lib/validation.ts`: contrato Zod do formulário do Army Pass, conectado ao editor.
+- `src/types/index.ts`: contratos iniciais de conteúdo e moderação. Não substituem autorização no servidor ou RLS.
+- `public/images`: reservado para arquivos com autorização documentada; sem fotos nesta fase.
+- `docs/architecture.md`: integração futura e condições para publicação de conteúdo.
+- `docs/validation.md`: verificações executadas e limites da validação.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Também foram alterados `package.json`, `package-lock.json` e `.gitignore`. TypeScript strict já estava ativo e foi preservado. Lucide React e Zod foram adicionados; Prettier mantém a formatação.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Próximas fases
+
+1. Revisão do Army Pass em navegadores e aparelhos reais; adicionar fotografias apenas após receber autorização. O gerador com artes e fotos pessoais já funciona.
+2. Jogos reais com perguntas e respostas revisadas; linha do tempo completa com fontes verificadas.
+3. Aplicar e validar a migration do Mural em Supabase, configurar Turnstile e autenticação administrativa, revisar políticas e retenção antes de abrir a participação pública.
+4. Políticas de privacidade/remoção, revisão de acessibilidade e validação visual em dispositivos reais antes de publicar.
+
+O formulário do Army Pass funciona inteiramente no navegador: não envia dados nem fotos. O Mural possui endpoints, filtros, denúncias e interfaces pública/administrativa; sem credenciais, migration aplicada e chaves Turnstile, as operações falham de forma segura e não persistem dados. Consulte [configuração e limites do Mural](docs/army-mural.md) antes de habilitar o serviço.

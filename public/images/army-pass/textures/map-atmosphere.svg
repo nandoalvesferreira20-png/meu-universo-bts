@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="941" height="1672" viewBox="0 0 941 1672">
+  <!-- Original blue paper / atmospheric texture. No reference bitmap, brand,
+       text, portrait or album artwork is embedded in this asset. -->
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#172d57"/><stop offset=".34" stop-color="#17467d"/>
+      <stop offset=".69" stop-color="#2f65a2"/><stop offset="1" stop-color="#284f86"/>
+    </linearGradient>
+    <radialGradient id="navy"><stop stop-color="#04163e" stop-opacity=".9"/><stop offset="1" stop-color="#071d4c" stop-opacity="0"/></radialGradient>
+    <radialGradient id="light"><stop stop-color="#d4d9f4" stop-opacity=".77"/><stop offset=".4" stop-color="#9dc8eb" stop-opacity=".35"/><stop offset="1" stop-color="#75b8ea" stop-opacity="0"/></radialGradient>
+    <radialGradient id="pink"><stop stop-color="#f0c9e7" stop-opacity=".85"/><stop offset=".5" stop-color="#d7b5d9" stop-opacity=".4"/><stop offset="1" stop-color="#d7b5d9" stop-opacity="0"/></radialGradient>
+    <linearGradient id="glass"><stop stop-color="#f0c9e7" stop-opacity=".75"/><stop offset=".5" stop-color="#b3d6f3" stop-opacity=".2"/><stop offset="1" stop-color="#ffffff" stop-opacity=".75"/></linearGradient>
+    <linearGradient id="sheet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0c9e7"/><stop offset=".25" stop-color="#b7cce6"/><stop offset=".6" stop-color="#ebc9e4"/><stop offset="1" stop-color="#779fcf"/></linearGradient>
+    <filter id="cloud" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency=".008 .016" numOctaves="4" seed="73" result="cloud"/>
+      <feColorMatrix in="cloud" type="matrix" values="0 0 0 0 .76 0 0 0 0 .84 0 0 0 0 .98 0 0 0 .65 -.2"/>
+      <feGaussianBlur stdDeviation=".5"/>
+    </filter>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".62" numOctaves="3" seed="27"/><feColorMatrix type="saturate" values="0"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+    <mask id="cloudMask"><rect width="941" height="1672" fill="black"/><ellipse cx="825" cy="355" rx="290" ry="420" fill="url(#light)"/><ellipse cx="82" cy="1320" rx="260" ry="465" fill="url(#light)"/><ellipse cx="919" cy="1410" rx="180" ry="320" fill="url(#light)"/></mask>
+  </defs>
+  <path fill="url(#paper)" d="M0 0h941v1672H0z"/>
+  <ellipse cx="153" cy="273" rx="490" ry="410" fill="url(#navy)"/>
+  <ellipse cx="817" cy="350" rx="390" ry="440" fill="url(#light)"/>
+  <ellipse cx="10" cy="1120" rx="260" ry="500" fill="url(#light)"/>
+  <ellipse cx="901" cy="1620" rx="340" ry="420" fill="url(#light)"/>
+  <ellipse cx="32" cy="1647" rx="290" ry="470" fill="url(#pink)"/>
+  <path d="M42 0h315L297 333 161 596 42 483Z" fill="#071d4c" opacity=".24"/>
+  <path d="M41 242C15 233 8 240 0 239V532H42Z" fill="#ecb8e0" opacity=".86"/>
+  <path d="M0 534 42 534 43 795Q35 831 0 845Z" fill="url(#glass)"/>
+  <path d="M941 613C863 677 804 782 819 868S861 1003 941 1072Z" fill="url(#pink)" opacity=".68" stroke="#e8badf" stroke-width=".8"/>
+  <path d="M592 124C712 172 786 233 835 354L729 374C693 257 648 204 592 124Z" fill="url(#glass)" opacity=".44"/>
+  <g opacity=".9">
+    <path d="M43 1218 179 1230 179 1672H43Z" fill="url(#sheet)"/>
+    <path d="M211 1262 331 1297 331 1672H211Z" fill="url(#sheet)"/>
+    <path d="M179 1251 211 1262 211 1672 179 1649Z" fill="#092859" opacity=".9"/>
+    <path d="M331 1297 425 1325 425 1672H331Z" fill="#b5c7eb" opacity=".15" stroke="#d7b5d9" stroke-width="1"/>
+  </g>
+  <path d="M0 1577C191 1678 302 1612 450 1546 562 1537 617 1710 755 1629L941 1558V1672H0Z" fill="url(#pink)"/>
+  <path d="M941 1437C788 1488 738 1531 616 1591 518 1638 466 1702 358 1672H941Z" fill="url(#glass)" opacity=".75"/>
+  <g mask="url(#cloudMask)"><rect width="941" height="1672" filter="url(#cloud)"/></g>
+  <rect width="941" height="1672" fill="#ffffff" filter="url(#grain)" opacity=".14" style="mix-blend-mode:soft-light"/>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="941" height="1672" viewBox="0 0 941 1672">
+  <!-- Original ink/paper landscape. No reference bitmap, photo, album logo,
+       brand symbol or editable information is embedded. -->
+  <defs>
+    <linearGradient id="paper"><stop stop-color="#9e8c7e"/><stop offset=".5" stop-color="#e4d6c6"/><stop offset="1" stop-color="#a08d82"/></linearGradient>
+    <radialGradient id="charcoal"><stop stop-color="#373330"/><stop offset=".55" stop-color="#181818"/><stop offset="1" stop-color="#101112"/></radialGradient>
+    <radialGradient id="mist"><stop stop-color="#c3b6a3" stop-opacity=".65"/><stop offset=".6" stop-color="#928474" stop-opacity=".25"/><stop offset="1" stop-color="#49423a" stop-opacity="0"/></radialGradient>
+    <linearGradient id="red"><stop stop-color="#a71920"/><stop offset=".5" stop-color="#dc242c"/><stop offset="1" stop-color="#b71927"/></linearGradient>
+    <pattern id="fibres" width="13" height="15" patternUnits="userSpaceOnUse"><path d="m1 1 4 3-2 4 6 3M10 0l-3 4 5 2-1 7M0 12l5 2" fill="none" stroke="#e2d3c0" stroke-width=".5" opacity=".035"/></pattern>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".53" numOctaves="3" seed="54"/><feColorMatrix type="saturate" values="0"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+    <clipPath id="topLandscape"><path d="M573 0H726V481H473V332H573Z"/></clipPath>
+    <clipPath id="bottomLandscape"><path d="M70 1192H140V1272H206V1301H309V1672H70Z"/></clipPath>
+    <clipPath id="brushClip"><path d="M-100 358C88 470 174 659 111 886 42 1131 309 1177 438 1410 489 1501 512 1603 517 1711L362 1711C372 1481 228 1322 87 1260-72 1186-87 1031-24 837 55 597-36 565-100 550Z"/></clipPath>
+    <g id="mountains">
+      <path d="M-50 180Q-2 143 23 124T104 99Q125 82 148 105T205 72Q229 57 252 82T307 59Q333 37 358 73T418 61Q452 61 500 102V390H-50Z" fill="#8d8276"/>
+      <path d="M-50 244Q12 177 43 217T99 152Q121 122 148 173T196 151Q215 135 245 184T300 127Q329 104 366 168T405 130Q445 144 500 196V390H-50Z" fill="#655d53"/>
+      <path d="M-50 298Q9 218 44 245T118 236Q143 212 165 241T213 192Q236 162 270 223T313 203Q340 211 375 250T425 222Q457 236 500 271V390H-50Z" fill="#363630"/>
+      <g fill="none" stroke="#b7a791" stroke-width=".8" opacity=".3">
+        <path d="M8 250Q38 238 57 261T102 246M96 177Q126 167 150 195T192 182M208 215Q231 208 248 232T288 225M304 151Q335 146 355 175T389 169"/>
+        <path d="M2 266Q38 254 57 277T102 262M96 192Q126 182 150 210T192 197M208 230Q231 223 248 247T288 240M304 166Q335 161 355 190T389 184"/>
+      </g>
+    </g>
+  </defs>
+  <rect width="941" height="1672" fill="url(#paper)"/>
+  <path d="M44 0H915V1208H881V1608L729 1672H44Z" fill="url(#charcoal)"/>
+  <ellipse cx="552" cy="424" rx="376" ry="180" fill="url(#mist)"/>
+  <g clip-path="url(#topLandscape)"><rect x="473" width="253" height="481" fill="url(#paper)"/><use href="#mountains" transform="translate(493 -34) scale(.75 1)"/><use href="#mountains" transform="translate(400 145) scale(.8 .9)"/></g>
+  <!-- A single landscape sun, not the three-symbol album mark. -->
+  <circle cx="705" cy="315" r="122" fill="url(#red)"/>
+  <circle cx="705" cy="315" r="122" fill="url(#fibres)"/>
+  <path d="M-100 358C88 470 174 659 111 886 42 1131 309 1177 438 1410 489 1501 512 1603 517 1711L362 1711C372 1481 228 1322 87 1260-72 1186-87 1031-24 837 55 597-36 565-100 550Z" fill="url(#red)"/>
+  <path d="M1120 635 808 833 784 877 1074 742Z" fill="#d52129"/>
+  <path d="M201 1196C302 1269 394 1334 423 1467S535 1642 628 1712" fill="none" stroke="#d51e25" stroke-width="54" opacity=".8"/>
+  <path d="M182 1208C305 1291 390 1361 422 1486S503 1639 586 1711" fill="none" stroke="#bb1720" stroke-width="8"/>
+  <g clip-path="url(#bottomLandscape)"><rect x="70" y="1180" width="239" height="492" fill="url(#paper)"/><use href="#mountains" transform="translate(101 1290) scale(.55 1)"/><use href="#mountains" transform="translate(90 1462) scale(.58 1)"/></g>
+  <rect x="70" y="1192" width="70" height="480" fill="url(#paper)"/>
+  <path d="M44 0V1672M726 0V481M844 0V595M881 1208V1608M140 1272V1672M206 1301V1672M309 1301V1672" stroke="#e4d5c3" stroke-width=".9" opacity=".58"/>
+  <path d="M879 1624 941 1600V1672H728Z" fill="#d3c4b4"/>
+  <path d="M0 1235 70 1268V1672H0Z" fill="#141515" opacity=".7"/>
+  <rect width="941" height="1672" fill="url(#fibres)"/>
+  <rect width="941" height="1672" fill="white" filter="url(#grain)" opacity=".13" style="mix-blend-mode:soft-light"/>
+</svg>
