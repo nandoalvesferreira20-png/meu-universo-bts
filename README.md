@@ -75,3 +75,10 @@ Também foram alterados `package.json`, `package-lock.json` e `.gitignore`. Type
 4. Políticas de privacidade/remoção, revisão de acessibilidade e validação visual em dispositivos reais antes de publicar.
 
 O formulário do Army Pass funciona inteiramente no navegador: não envia dados nem fotos. O Mural possui endpoints, filtros, denúncias e interfaces pública/administrativa; sem credenciais, migration aplicada e chaves Turnstile, as operações falham de forma segura e não persistem dados. Consulte [configuração e limites do Mural](docs/army-mural.md) antes de habilitar o serviço.
+
+## Deploy de testes na Vercel
+
+Use o preset nativo **Next.js**, a raiz do repositório e **Node.js 24.x**. O portal
+pode ser publicado sem credenciais, mantendo o Mural indisponível de forma segura.
+Consulte o [guia de deploy e variáveis de ambiente](docs/vercel-deployment.md) e
+[`.env.example`](.env.example) antes de configurar serviços. O primeiro deploy é manual.
