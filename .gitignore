@@ -53,10 +53,8 @@ id_ed25519
 /.aws/
 /.ssh/
 
-# Local deployment and Supabase CLI state (SQL migrations remain versionable)
+# Local deployment state
 /.vercel/
-/supabase/.temp/
-/supabase/.branches/
 
 # OS and editor-local files; shared VS Code JSON configuration stays versionable
 .DS_Store

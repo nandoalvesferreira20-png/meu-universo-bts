@@ -16,7 +16,7 @@ export default function Home() {
           />
           <span className="section-side">EXPLORE O NOSSO UNIVERSO ↙</span>
         </div>
-        <div className="experience-grid">
+        <div className="experience-grid home-experiences">
           {experiences.map((experience, index) => (
             <ExperienceCard
               key={experience.href}
@@ -26,8 +26,8 @@ export default function Home() {
           ))}
         </div>
         <p className="development-note">
-          ● Army Pass disponível. As outras experiências estão em
-          desenvolvimento.
+          ● Army Pass, jogos, História do BTS e ARIRANG TOUR: explore cada
+          experiência.
         </p>
       </section>
       <section className="container tour-section">

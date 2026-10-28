@@ -1,0 +1,183 @@
+﻿.page {
+  color: #301653;
+}
+.intro {
+  max-width: 800px;
+  padding: 48px 0 64px;
+}
+.intro h1 {
+  max-width: 760px;
+  margin: 20px 0 28px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(34px, 4.4vw, 58px);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.copy {
+  min-width: 0;
+  color: #5d506d;
+  font-size: 16px;
+  line-height: 1.85;
+}
+.copy p {
+  margin: 0 0 18px;
+}
+.copy p:last-child {
+  margin-bottom: 0;
+}
+.partner,
+.development {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr);
+  gap: 64px;
+}
+.partner {
+  padding: 48px;
+  border: 1px solid #dfd5ed;
+  border-radius: 20px;
+  background: #ede4fa;
+}
+.development {
+  padding: 64px 48px;
+}
+.sectionHeading h2 {
+  margin: 18px 0 24px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 400;
+  line-height: 1.22;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #67478c;
+}
+.signature {
+  display: block;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.development .signature {
+  border-left: 3px solid #b8d955;
+  padding-left: 12px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 11px 16px;
+  border: 1px solid #d4c6e4;
+  border-radius: 9px;
+  color: #472574;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: none;
+  transition:
+    background-color 160ms,
+    border-color 160ms;
+}
+.button svg {
+  flex-shrink: 0;
+}
+.button:hover {
+  background: #f4effa;
+  border-color: #8967b2;
+}
+.primary {
+  margin-top: 8px;
+  background: #4e287d;
+  border-color: #4e287d;
+  color: #fff;
+}
+.primary:hover {
+  background: #3b1c62;
+  border-color: #3b1c62;
+}
+.notice {
+  border-top: 1px solid #dfd5ed;
+  padding: 28px 0 0;
+  color: #6d607d;
+}
+.notice h2 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: #49365e;
+}
+.notice p {
+  margin: 0;
+  max-width: 760px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+@media (max-width: 900px) {
+  .partner,
+  .development {
+    gap: 32px;
+    grid-template-columns: 1fr;
+  }
+  .partner {
+    padding: 32px;
+  }
+  .development {
+    padding: 48px 32px;
+  }
+  .sectionHeading h2 {
+    max-width: 520px;
+    margin-bottom: 18px;
+  }
+}
+@media (max-width: 480px) {
+  .intro {
+    padding: 36px 0 40px;
+  }
+  .intro h1 {
+    margin-top: 16px;
+  }
+  .partner {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+  .development {
+    padding: 40px 0;
+  }
+  .copy {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+  .button {
+    width: 100%;
+    padding-inline: 10px;
+    font-size: 12px;
+    gap: 7px;
+  }
+  .actions {
+    gap: 10px;
+  }
+}

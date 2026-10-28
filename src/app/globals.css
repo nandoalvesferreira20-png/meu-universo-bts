@@ -375,6 +375,32 @@ button:focus-visible {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
+.home-experiences {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+.home-experiences > .experience-card {
+  grid-column: span 2;
+}
+.home-experiences > .experience-card:nth-child(4) {
+  grid-column: 2 / span 2;
+}
+@media (min-width: 381px) and (max-width: 760px) {
+  .experience-grid.home-experiences {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .home-experiences > .experience-card:nth-child(4) {
+    grid-column: span 2;
+  }
+  .home-experiences > .experience-card:last-child {
+    grid-column: 2 / span 2;
+  }
+}
+@media (max-width: 380px) {
+  .home-experiences > .experience-card,
+  .home-experiences > .experience-card:nth-child(4) {
+    grid-column: auto;
+  }
+}
 .experience-card {
   background: var(--white);
   border: 1px solid var(--line);

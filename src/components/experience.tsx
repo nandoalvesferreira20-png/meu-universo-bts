@@ -2,7 +2,6 @@ import { timelineStructure } from "@/data/portal";
 import Link from "next/link";
 import {
   ArrowRight,
-  Heart,
   IdCard,
   Music2,
   Sparkles,
@@ -11,10 +10,9 @@ import {
   Construction,
   Globe2,
 } from "lucide-react";
-import type { Experience, CommunityMessage, GalleryMemory } from "@/types";
+import type { Experience } from "@/types";
 const icons = {
   pass: IdCard,
-  heart: Heart,
   music: Music2,
   quiz: Sparkles,
   history: History,
@@ -135,25 +133,6 @@ export function QuizCategoryCard({
         Ver detalhes <ArrowRight size={17} />
       </span>
     </Link>
-  );
-}
-export function MessageCard({ message }: { message: CommunityMessage }) {
-  if (message.status !== "approved") return null;
-  return (
-    <article className="message-card">
-      <Heart size={20} />
-      <p>{message.body}</p>
-      <span>Com carinho, {message.author}</span>
-    </article>
-  );
-}
-export function GalleryCard({ memory }: { memory: GalleryMemory }) {
-  if (memory.status !== "approved") return null;
-  return (
-    <figure className="gallery-card">
-      <a href={memory.imageUrl}>Ver fotografia: {memory.caption}</a>
-      <figcaption>{memory.caption}</figcaption>
-    </figure>
   );
 }
 export function TimelineSection() {

@@ -8,13 +8,6 @@ export const experiences: Experience[] = [
     icon: "pass",
   },
   {
-    href: "/mural",
-    title: "Mural ARMY",
-    description:
-      "Palavras que atravessam distâncias. Um espaço para o nosso carinho.",
-    icon: "heart",
-  },
-  {
     href: "/jogos/emojis",
     title: "Emoji Challenge",
     description: "Uma sequência de emojis. Uma música. Você reconhece?",
@@ -43,7 +36,6 @@ export const experiences: Experience[] = [
 ];
 export const navigation = [
   { href: "/army-pass", label: "Army Pass" },
-  { href: "/mural", label: "Mural" },
   { href: "/jogos", label: "Jogos" },
   { href: "/historia", label: "História" },
   { href: "/arirang-tour", label: "ARIRANG TOUR" },
@@ -60,7 +52,7 @@ export const heroContent = {
   tag: "NOSSA CONEXÃO VAI ALÉM DA MÚSICA",
   title: ["Um universo feito", "por ARMYs,", "para ARMYs."],
   description:
-    "Crie memórias, teste seus conhecimentos, compartilhe histórias e celebre sua conexão com o BTS.",
+    "Crie memórias, teste seus conhecimentos, revisite histórias e celebre sua conexão com o BTS.",
   note: "Sete histórias. Infinitas conexões. O seu universo.",
 };
 export const timelineStructure = [
