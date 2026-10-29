@@ -1,7 +1,15 @@
 "use client";
-import { Download, Share2, Pencil, Shuffle, RotateCcw } from "lucide-react";
+import {
+  Copy,
+  Download,
+  Share2,
+  Pencil,
+  Shuffle,
+  RotateCcw,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { canSharePass, downloadPass, exportArmyPass } from "./export";
+import { armyPassCaption, armyPassShareData } from "./share-caption";
 import type { PassModel } from "./types";
 import styles from "./army-pass.module.css";
 
@@ -16,13 +24,36 @@ export function ArmyPassShareActions({
 }) {
   const [message, setMessage] = useState("");
   const [sharing, setSharing] = useState(false);
+  const [copying, setCopying] = useState(false);
+  const [manualCopy, setManualCopy] = useState(false);
+  const caption = armyPassCaption(process.env.NEXT_PUBLIC_SITE_URL);
   const shareSupported = canSharePass(file);
+  async function copyCaption() {
+    setCopying(true);
+    setMessage("");
+    try {
+      await navigator.clipboard.writeText(caption);
+      setManualCopy(false);
+      setMessage(
+        "Legenda copiada! Cole na sua publicação para marcar os perfis. 💜",
+      );
+    } catch {
+      setManualCopy(true);
+      setMessage(
+        "Não foi possível copiar automaticamente. Selecione e copie a legenda abaixo.",
+      );
+    } finally {
+      setCopying(false);
+    }
+  }
   async function share() {
     setSharing(true);
     setMessage("");
     try {
       // Arquivo já preparado: a chamada preserva a ativação do clique no mobile.
-      await navigator.share({ files: [file], title: "Meu Army Pass Brasil" });
+      await navigator.share(
+        armyPassShareData(file, caption, (data) => navigator.canShare(data)),
+      );
       setMessage("Army Pass entregue ao compartilhamento do seu dispositivo.");
     } catch (error) {
       setMessage(
@@ -59,6 +90,50 @@ export function ArmyPassShareActions({
             <Share2 size={18} />
             {sharing ? "Compartilhando…" : "Compartilhar Army Pass"}
           </button>
+        )}
+      </div>
+      <div className={styles.sharePrompt}>
+        <p>
+          Compartilhou seu Army Pass? Marque{" "}
+          <a
+            href="https://www.instagram.com/meuuniversobts/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            @meuuniversobts
+          </a>{" "}
+          e{" "}
+          <a
+            href="https://www.instagram.com/fernandev.tech/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            @fernandev.tech
+          </a>{" "}
+          para a gente ver! 💜
+        </p>
+        <button
+          type="button"
+          className={styles.smallButton}
+          onClick={() => void copyCaption()}
+          disabled={copying}
+        >
+          <Copy size={15} aria-hidden="true" />
+          {copying ? "Copiando…" : "Copiar legenda"}
+        </button>
+        <p className={styles.captionHint}>
+          Alguns apps podem não incluir a legenda. Copie e cole o texto na
+          publicação.
+        </p>
+        {manualCopy && (
+          <textarea
+            className={styles.captionFallback}
+            aria-label="Legenda para copiar manualmente"
+            value={caption}
+            readOnly
+            rows={6}
+            onFocus={(event) => event.currentTarget.select()}
+          />
         )}
       </div>
       {!shareSupported && (

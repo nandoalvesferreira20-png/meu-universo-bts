@@ -1,6 +1,7 @@
 import { expect, test, type Page, type TestInfo } from "@playwright/test";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { createCanvas } from "@napi-rs/canvas";
+import { armyPassCaption } from "../../src/features/army-pass/share-caption";
 
 const eras = ["wings", "map-of-the-soul", "persona", "arirang"];
 const runtimeErrors = new WeakMap<Page, string[]>();
@@ -220,17 +221,19 @@ for (const era of eras)
       await expect(
         page.locator('input[name="gallery-photo"]').first(),
       ).toBeChecked();
-      expect(
-        await page
-          .locator('[class*="artGrid"] img')
-          .evaluateAll((images) =>
-            images.every(
-              (image) =>
-                (image as HTMLImageElement).complete &&
-                (image as HTMLImageElement).naturalWidth > 0,
+      await expect
+        .poll(() =>
+          page
+            .locator('[class*="artGrid"] img')
+            .evaluateAll((images) =>
+              images.every(
+                (image) =>
+                  (image as HTMLImageElement).complete &&
+                  (image as HTMLImageElement).naturalWidth > 0,
+              ),
             ),
-          ),
-      ).toBe(true);
+        )
+        .toBe(true);
     } else if (era === "map-of-the-soul") {
       await expect(
         page.getByRole("heading", { name: "Novas imagens, em breve." }),
@@ -240,17 +243,19 @@ for (const era of eras)
       await expect(
         page.locator('input[name="gallery-photo"]').first(),
       ).toBeChecked();
-      expect(
-        await page
-          .locator('[class*="artGrid"] img')
-          .evaluateAll((images) =>
-            images.every(
-              (image) =>
-                (image as HTMLImageElement).complete &&
-                (image as HTMLImageElement).naturalWidth > 0,
+      await expect
+        .poll(() =>
+          page
+            .locator('[class*="artGrid"] img')
+            .evaluateAll((images) =>
+              images.every(
+                (image) =>
+                  (image as HTMLImageElement).complete &&
+                  (image as HTMLImageElement).naturalWidth > 0,
+              ),
             ),
-          ),
-      ).toBe(true);
+        )
+        .toBe(true);
     } else if (era === "persona" || era === "arirang") {
       await expect(
         page.getByRole("heading", { name: "Novas imagens, em breve." }),
@@ -260,17 +265,19 @@ for (const era of eras)
       await expect(
         page.locator('input[name="gallery-photo"]').first(),
       ).toBeChecked();
-      expect(
-        await page
-          .locator('[class*="artGrid"] img')
-          .evaluateAll((images) =>
-            images.every(
-              (image) =>
-                (image as HTMLImageElement).complete &&
-                (image as HTMLImageElement).naturalWidth > 0,
+      await expect
+        .poll(() =>
+          page
+            .locator('[class*="artGrid"] img')
+            .evaluateAll((images) =>
+              images.every(
+                (image) =>
+                  (image as HTMLImageElement).complete &&
+                  (image as HTMLImageElement).naturalWidth > 0,
+              ),
             ),
-          ),
-      ).toBe(true);
+        )
+        .toBe(true);
       if (era === "arirang")
         await expect(
           page.locator("#group-zoom, #group-x, #group-y"),
@@ -722,7 +729,7 @@ test("prévia ampliada, foco e fallback de logos pendentes", async ({
   await noOverflow(page);
 });
 
-for (const shareEra of ["wings", "persona", "arirang"])
+for (const shareEra of eras)
   test(`compartilhamento usa o PNG pronto e trata cancelamento (${shareEra})`, async ({
     page,
   }) => {
@@ -739,6 +746,12 @@ for (const shareEra of ["wings", "persona", "arirang"])
           if (calls === 1) throw new DOMException("Cancelado", "AbortError");
           if (data.files?.[0].type !== "image/png")
             throw new Error("Arquivo inválido");
+          if (
+            !data.text?.includes("💜 Meu ARMY PASS está pronto!") ||
+            !data.text.includes("@meuuniversobts") ||
+            !data.text.includes("@fernandev.tech")
+          )
+            throw new Error("Legenda ausente");
         },
       });
     });
@@ -763,6 +776,91 @@ for (const shareEra of ["wings", "persona", "arirang"])
       ),
     ).toBeVisible();
   });
+
+test("copiar legenda: sucesso, erro, cópia manual, links e navegador sem Web Share", async ({
+  page,
+}) => {
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, "share", {
+      configurable: true,
+      value: undefined,
+    });
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: {
+        writeText: async (text: string) => {
+          (window as Window & { passCaption?: string }).passCaption = text;
+        },
+      },
+    });
+  });
+  await page.getByRole("button", { name: "Personalizar meu pass" }).click();
+  await fillForm(page);
+  await page
+    .getByRole("button", { name: "Revisar passaporte", exact: true })
+    .last()
+    .click();
+  await page.getByRole("button", { name: "Preparar meu PNG" }).click();
+  const copy = page.getByRole("button", {
+    name: "Copiar legenda",
+    exact: true,
+  });
+  await expect(copy).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Compartilhar Army Pass" }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByText(/Este navegador não oferece compartilhamento de arquivos/),
+  ).toBeVisible();
+  await copy.click();
+  await expect(page.getByText(/Legenda copiada!/)).toBeVisible();
+  expect(
+    await page.evaluate(
+      () => (window as Window & { passCaption?: string }).passCaption,
+    ),
+  ).toBe(armyPassCaption(process.env.NEXT_PUBLIC_SITE_URL));
+  for (const handle of ["meuuniversobts", "fernandev.tech"]) {
+    const link = page.getByRole("link", { name: `@${handle}`, exact: true });
+    await expect(link).toHaveAttribute(
+      "href",
+      `https://www.instagram.com/${handle}/`,
+    );
+    await expect(link).toHaveAttribute("target", "_blank");
+    await expect(link).toHaveAttribute("rel", "noopener noreferrer");
+  }
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: {
+        writeText: async () => {
+          throw new Error("Permission denied");
+        },
+      },
+    });
+  });
+  await copy.click();
+  await expect(
+    page.getByText(/Não foi possível copiar automaticamente/),
+  ).toBeVisible();
+  const manual = page.getByRole("textbox", {
+    name: "Legenda para copiar manualmente",
+  });
+  await expect(manual).toHaveValue(
+    armyPassCaption(process.env.NEXT_PUBLIC_SITE_URL),
+  );
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: undefined,
+    });
+  });
+  await copy.click();
+  await expect(manual).toBeVisible();
+  for (const width of [320, 375, 390, 430, 768, 1024, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await noOverflow(page);
+  }
+});
 
 test("validação, galeria ARIRANG, arquivo inválido e navegação por teclado", async ({
   page,
