@@ -587,7 +587,7 @@ test("seleção das três fotos ARIRANG atualiza a prévia e o PNG exportado", a
 });
 
 for (const photoEra of eras)
-  test(`foto pessoal, recorte, troca, remoção e preservação sem envio ao servidor (${photoEra})`, async ({
+  test(`foto pessoal com enquadramento padrão, troca, remoção e preservação sem envio ao servidor (${photoEra})`, async ({
     page,
   }, info) => {
     const posts: string[] = [];
@@ -612,7 +612,10 @@ for (const photoEra of eras)
       await expect(
         page.getByRole("button", { name: "Remover foto" }),
       ).toBeVisible();
-      await expect(page.locator("#pass-photo-zoom")).toBeVisible();
+      await expect(page.getByRole("slider")).toHaveCount(0);
+      await expect(
+        page.getByText("Ajuste o enquadramento", { exact: true }),
+      ).toHaveCount(0);
       await expect(page.locator("canvas").locator("..")).toHaveAttribute(
         "aria-busy",
         "false",
@@ -664,17 +667,9 @@ for (const photoEra of eras)
     );
     expect(afterPhoto.portrait).not.toEqual(beforePhoto.portrait);
 
-    const personalZoom = page.locator("#pass-photo-zoom");
-    const personalX = page.locator("#pass-photo-x");
-    await personalZoom.focus();
-    await page.keyboard.press("End");
-    await expect(personalZoom).toHaveValue("3");
-    await personalX.focus();
-    await page.keyboard.press("Home");
-    await expect(personalX).toHaveValue("0");
-    await expect(personalZoom).toHaveValue("3");
     await upload();
-    await expect(personalZoom).toHaveValue("1");
+    const afterReplacement = await sample();
+    expect(afterReplacement.portrait).toEqual(afterPhoto.portrait);
     await page.getByRole("button", { name: "Remover foto" }).click();
     await expect(
       page.getByRole("button", { name: "Remover foto" }),
@@ -684,6 +679,7 @@ for (const photoEra of eras)
       .getByRole("button", { name: "Revisar passaporte", exact: true })
       .last()
       .click();
+    await expect(page.getByRole("slider")).toHaveCount(0);
     await page.getByRole("button", { name: "Preparar meu PNG" }).click();
     await downloadAndCompare(page, photoEra, info);
     await page.getByRole("button", { name: "Experimentar outra era" }).click();

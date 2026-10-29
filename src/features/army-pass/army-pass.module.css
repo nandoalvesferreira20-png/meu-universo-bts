@@ -531,8 +531,7 @@
 }
 .formGrid input:focus-visible,
 .formGrid select:focus-visible,
-.formGrid textarea:focus-visible,
-.cropper input:focus-visible {
+.formGrid textarea:focus-visible {
   outline: 3px solid var(--purple);
   outline-offset: 3px;
 }
@@ -765,38 +764,6 @@
 .disabled {
   opacity: 0.5;
   cursor: wait;
-}
-.cropper {
-  border: 0;
-  border-top: 1px solid var(--border);
-  padding: 24px 0 0;
-  margin: 22px 0 0;
-  min-width: 0;
-}
-.cropper legend {
-  font: 400 22px var(--serif);
-  float: left;
-  width: 100%;
-  margin-bottom: 14px;
-}
-.cropper label {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  font-size: 12px;
-  margin-bottom: 17px;
-  color: var(--deep);
-}
-.cropper output {
-  font-size: 11px;
-  color: var(--muted);
-}
-.cropper input {
-  width: 100%;
-  margin-top: 12px;
-  accent-color: var(--purple);
-  min-height: 28px;
-  cursor: pointer;
 }
 .privacy {
   font-size: 10px;

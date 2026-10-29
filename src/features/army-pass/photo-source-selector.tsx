@@ -4,7 +4,6 @@ import { Images, Upload, Trash2, Check } from "lucide-react";
 import { useRef, useState, type Dispatch } from "react";
 import { eraThemes, photosForEra } from "./themes";
 import { processPersonalPhoto } from "./image-processing";
-import { PhotoCropper } from "./photo-cropper";
 import type { BuilderAction, BuilderState } from "./state";
 import type { EraId } from "./types";
 import styles from "./army-pass.module.css";
@@ -110,7 +109,7 @@ export function PersonalPhotoUploader({
         <img
           className={styles.uploadThumbnail}
           src={state.photo.url}
-          alt="Sua foto selecionada, antes do recorte"
+          alt="Sua foto selecionada"
           width="120"
           height="120"
         />
@@ -209,12 +208,6 @@ export function PhotoSourceSelector({
           onUpload={onUpload}
           onRemove={onRemove}
         />
-        {state.photo && (
-          <PhotoCropper
-            crop={state.personalCrop}
-            onChange={(crop) => dispatch({ type: "personal-crop", crop })}
-          />
-        )}
       </div>
       {state.era === "wings" && (
         <p className={styles.hint}>

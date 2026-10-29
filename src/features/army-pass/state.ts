@@ -18,7 +18,6 @@ export type BuilderState = {
   era: EraId;
   fields: PassFields;
   photo: PersonalPhoto | null;
-  personalCrop: Crop;
   galleryId: string | null;
   gallerySelectionByEra: Partial<Record<EraId, string>>;
 };
@@ -31,7 +30,6 @@ export function createInitialBuilderState(
     era: "wings",
     fields: initialFields,
     photo: null,
-    personalCrop: defaultCrop,
     galleryId: firstPhoto?.id ?? null,
     gallerySelectionByEra: firstPhoto ? { wings: firstPhoto.id } : {},
   };
@@ -42,7 +40,6 @@ export type BuilderAction =
   | { type: "era"; era: EraId }
   | { type: "fields"; fields: PassFields }
   | { type: "photo"; photo: PersonalPhoto | null }
-  | { type: "personal-crop"; crop: Crop }
   | { type: "gallery"; id: string };
 
 export function builderReducer(
@@ -89,10 +86,7 @@ export function builderReducer(
       return {
         ...state,
         photo: action.photo,
-        personalCrop: defaultCrop,
       };
-    case "personal-crop":
-      return { ...state, personalCrop: action.crop };
     case "gallery": {
       const photo = photosForEra(state.era, manifest).find(
         (candidate) => candidate.id === action.id,

@@ -209,17 +209,11 @@ test("WINGS mede cada campo máximo dentro de seu slot, sem truncar ou desenhar 
   }
 });
 
-test("recorte pessoal permanece disponível e independente da foto do grupo", () => {
+test("foto pessoal permanece independente da foto do grupo", () => {
   const photo = { url: "blob:local", width: 400, height: 800 };
   let state = builderReducer(initialBuilderState, { type: "photo", photo });
-  state = builderReducer(state, {
-    type: "personal-crop",
-    crop: { zoom: 2, x: 0, y: 70 },
-  });
-  assert.equal(state.personalCrop.zoom, 2);
   assert.equal(state.galleryId, "wings-01");
   state = builderReducer(state, { type: "gallery", id: "wings-02" });
-  assert.equal(state.personalCrop.zoom, 2);
   assert.equal(state.galleryId, "wings-02");
   assert.equal(state.photo, photo);
 });
@@ -261,17 +255,12 @@ test("etapas e quatro eras preservam dados e retrato; troca de era limpa somente
   const photo = { url: "blob:local-photo", width: 800, height: 1200 };
   let state = builderReducer(initialBuilderState, { type: "fields", fields });
   state = builderReducer(state, { type: "photo", photo });
-  state = builderReducer(state, {
-    type: "personal-crop",
-    crop: { zoom: 2, x: 25, y: 70 },
-  });
   for (const era of eraIds) {
     state = builderReducer(state, { type: "era", era });
     for (const step of [2, 3, 4, 2, 1])
       state = builderReducer(state, { type: "step", step });
     assert.deepEqual(state.fields, fields);
     assert.equal(state.photo, photo);
-    assert.equal(state.personalCrop.zoom, 2);
   }
   state = builderReducer(
     { ...state, galleryId: "old-photo" },
@@ -281,7 +270,6 @@ test("etapas e quatro eras preservam dados e retrato; troca de era limpa somente
   assert.equal(state.photo, photo);
   state = builderReducer(state, { type: "photo", photo: null });
   assert.equal(state.photo, null);
-  assert.deepEqual(state.personalCrop, defaultCrop);
 });
 
 const galleryFixture = (

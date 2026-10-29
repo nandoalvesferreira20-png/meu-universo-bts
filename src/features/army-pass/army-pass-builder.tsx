@@ -81,10 +81,10 @@ export function ArmyPassBuilder() {
       imageFitMode: galleryPhoto?.fitMode ?? "cover",
       imageCredit: galleryPhoto?.credit,
       personalPhoto: state.photo
-        ? { url: state.photo.url, crop: state.personalCrop }
+        ? { url: state.photo.url, crop: defaultCrop }
         : undefined,
     }),
-    [state.era, state.fields, state.photo, state.personalCrop, galleryPhoto],
+    [state.era, state.fields, state.photo, galleryPhoto],
   );
 
   function goTo(step: number) {
