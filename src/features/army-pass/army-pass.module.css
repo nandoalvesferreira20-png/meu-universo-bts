@@ -244,7 +244,7 @@
   text-align: center;
 }
 .eraCard[data-era="wings"] .eraCardArt {
-  background: #101010 url("/images/army-pass/textures/wings-smoke.png") center
+  background: #101010 url("/images/army-pass/cards/wings-smoke.webp") center
     45% / cover;
 }
 .eraCard[data-era="wings"] .eraCardArt > span {
@@ -254,7 +254,7 @@
   letter-spacing: 7px;
 }
 .eraCard[data-era="map-of-the-soul"] .eraCardArt {
-  background: #172d57 url("/images/army-pass/textures/map-atmosphere.png")
+  background: #172d57 url("/images/army-pass/cards/map-atmosphere.webp")
     center / cover;
 }
 .eraCard[data-era="map-of-the-soul"] .eraCardArt > span {
@@ -1254,7 +1254,7 @@
 }
 
 .eraCard[data-era="persona"] .eraCardArt {
-  background: #e87798 url("/images/army-pass/textures/persona-atmosphere.png")
+  background: #e87798 url("/images/army-pass/cards/persona-atmosphere.webp")
     center / cover;
 }
 .eraCard[data-era="persona"] .eraCardArt > span {
@@ -1268,7 +1268,7 @@
 }
 
 .eraCard[data-era="arirang"] .eraCardArt {
-  background: #f2efe9 url("/images/army-pass/textures/arirang-light-paper.png")
+  background: #f2efe9 url("/images/army-pass/cards/arirang-light-paper.webp")
     center 46% / cover;
 }
 .eraCard[data-era="arirang"] .eraCardArt > .arirangPreview {

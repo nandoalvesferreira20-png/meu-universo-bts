@@ -1,5 +1,6 @@
 ﻿import { test, expect } from "@playwright/test";
 import { worldTourPhotos } from "../../src/data/arirang-world-gallery";
+import { datedTourStops } from "../../src/data/arirang-tour";
 test("galeria mundial: 12 fotos locais, navegação, miniaturas, ordem e seções preservadas", async ({
   page,
 }, info) => {
@@ -103,7 +104,10 @@ test("galeria mundial: 12 fotos locais, navegação, miniaturas, ordem e seçõe
   });
   await expect(slide).toHaveAttribute("aria-label", "1 de 12");
   const brazil = page.locator('[data-tour-stop="sao-paulo"]');
-  await expect(brazil).toContainText("Em breve, ARMYs 💜");
+  await expect(brazil).toHaveAttribute(
+    "data-status",
+    datedTourStops(new Date()).find((stop) => stop.id === "sao-paulo")!.status,
+  );
   expect(
     await gallery.evaluate((el) =>
       Boolean(
@@ -129,6 +133,14 @@ test("galeria mundial: 12 fotos locais, navegação, miniaturas, ordem e seçõe
   await expect(
     netflix.locator('[aria-roledescription="slide"]'),
   ).toHaveAttribute("aria-label", "1 de 4");
+  for (const width of [390, 320, 390, 375, 430, 320, 1440, 390]) {
+    await page.setViewportSize({ width, height: 900 });
+    const controls = netflix.getByRole("button", {
+      name: "Deslocar miniaturas para a direita",
+      exact: true,
+    });
+    await expect(controls).toHaveCount(width === 320 ? 1 : 0);
+  }
   await expect(gallery.getByRole("link")).toHaveCount(0);
   for (const width of [info.project.use.viewport!.width, 320]) {
     await page.setViewportSize({ width, height: 900 });

@@ -33,6 +33,7 @@ export function EventCarousel({
 }: GalleryOptions) {
   const [index, setIndex] = useState(0);
   const strip = useRef<HTMLDivElement>(null);
+  const navigation = useRef<HTMLDivElement>(null);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
   const [scrollState, setScrollState] = useState({
     overflow: false,
@@ -49,15 +50,26 @@ export function EventCarousel({
     );
   useEffect(() => {
     const element = strip.current;
-    if (!element) return;
-    const update = () =>
+    if (!element || !navigation.current) return;
+    const container = navigation.current;
+    const update = () => {
+      // Measure the full rail independently of controls that shrink the strip.
+      const children = Array.from(element.children) as HTMLElement[];
+      const style = getComputedStyle(element);
+      const contentWidth =
+        children.reduce((width, child) => width + child.offsetWidth, 0) +
+        Math.max(0, children.length - 1) * (parseFloat(style.columnGap) || 0) +
+        parseFloat(style.paddingLeft) +
+        parseFloat(style.paddingRight);
       setScrollState({
-        overflow: element.scrollWidth > element.clientWidth + 1,
+        overflow: contentWidth > container.clientWidth + 1,
         previous: element.scrollLeft > 1,
         next:
           element.scrollLeft + element.clientWidth < element.scrollWidth - 1,
       });
+    };
     const observer = new ResizeObserver(update);
+    observer.observe(container);
     observer.observe(element);
     element.addEventListener("scroll", update, { passive: true });
     update();
@@ -175,7 +187,7 @@ export function EventCarousel({
           </>
         )}
       </div>
-      <div className={styles.thumbnailNavigation}>
+      <div ref={navigation} className={styles.thumbnailNavigation}>
         {scrollState.overflow && (
           <button
             className={styles.stripArrow}

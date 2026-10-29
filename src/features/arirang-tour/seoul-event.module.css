@@ -232,10 +232,13 @@
 .credit {
   margin-top: 7px;
   color: #716761;
-  font-size: 10px;
+  font-size: 12px;
+  line-height: 1.6;
 }
 .credit a,
 .sources a {
+  display: inline-block;
+  padding-block: 3px;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -246,7 +249,7 @@
   white-space: nowrap;
 }
 .counter span {
-  color: #7c716b;
+  color: #746963;
 }
 .sources {
   border-top: 1px solid #ded6d0;
@@ -305,7 +308,7 @@
     font-size: 19px;
   }
   .credit {
-    font-size: 9px;
+    font-size: 12px;
   }
   .thumbnail {
     flex-basis: 64px;

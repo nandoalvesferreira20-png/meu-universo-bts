@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-for (const width of [320, 375, 390, 430, 768, 1024, 1440]) {
+for (const width of [320, 375, 390, 430, 768, 1024, 1440, 1920]) {
   test(`portal navigation at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/");
@@ -37,14 +37,41 @@ for (const width of [320, 375, 390, 430, 768, 1024, 1440]) {
     const boxes = await page.locator(".experience-card").evaluateAll((cards) =>
       cards.map((card) => {
         const { x, y, width } = card.getBoundingClientRect();
-        return { x, y, width };
+        const ctaBottom = card
+          .querySelector(".card-link")!
+          .getBoundingClientRect().bottom;
+        return { x, y, width, ctaBottom };
       }),
     );
     const row = boxes.filter((box) => box.y === boxes.at(-1)!.y);
     const center = (row[0].x + row.at(-1)!.x + row.at(-1)!.width) / 2;
     expect(Math.abs(center - width / 2)).toBeLessThanOrEqual(1);
+    for (const card of boxes) {
+      for (const peer of boxes.filter((box) => Math.abs(box.y - card.y) < 1)) {
+        expect(Math.abs(peer.ctaBottom - card.ctaBottom)).toBeLessThan(1);
+      }
+    }
   });
 }
+
+test("nested game route identifies the active navigation item", async ({
+  page,
+}) => {
+  await page.goto("/jogos/quiz/rm");
+  await expect(
+    page.locator('.desktop-navigation a[aria-current="page"]'),
+  ).toHaveAttribute("href", "/jogos");
+  await expect(
+    page.locator('.site-footer nav a[aria-current="page"]'),
+  ).toHaveAttribute("href", "/jogos");
+  const menu = page.getByRole("button", { name: "Abrir menu" });
+  if (await menu.isVisible()) {
+    await menu.click();
+    await expect(
+      page.locator('#mobile-menu a[aria-current="page"]'),
+    ).toHaveAttribute("href", "/jogos");
+  }
+});
 
 test("retired routes return 404 and institutional credits remain", async ({
   page,

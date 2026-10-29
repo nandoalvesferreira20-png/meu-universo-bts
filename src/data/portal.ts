@@ -30,7 +30,7 @@ export const experiences: Experience[] = [
   {
     href: "/arirang-tour",
     title: "ARIRANG TOUR",
-    description: "No show ou no cinema, cada encontro merece uma memãria.",
+    description: "No show ou no cinema, cada encontro merece uma memória.",
     icon: "gallery",
   },
 ];

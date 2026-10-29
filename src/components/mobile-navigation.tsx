@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { NavigationLink } from "./navigation-link";
 import { useState, useRef, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { navigation } from "@/data/portal";
@@ -32,13 +32,13 @@ export function MobileNavigation() {
       {open && (
         <nav id="mobile-menu" aria-label="Menu mobile">
           {[...navigation, { href: "/sobre", label: "Sobre" }].map((item) => (
-            <Link
+            <NavigationLink
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
             >
               {item.label}
-            </Link>
+            </NavigationLink>
           ))}
         </nav>
       )}

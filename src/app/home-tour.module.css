@@ -1,0 +1,14 @@
+.photograph {
+  display: grid;
+  align-items: center;
+  min-width: 0;
+  background: #1c1c1e;
+}
+
+.photograph img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}

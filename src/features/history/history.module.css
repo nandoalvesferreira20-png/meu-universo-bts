@@ -302,6 +302,7 @@
   font-weight: 700;
 }
 .references {
+  line-height: 1.7;
   display: grid;
   gap: 9px;
   font-size: 12px;
@@ -311,6 +312,7 @@
 }
 .references a,
 .sources a {
+  padding-block: 4px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -770,15 +772,19 @@
 }
 .photoAttribution {
   margin-top: 8px;
-  font-size: 11px;
+  font-size: 12px;
+  line-height: 1.7;
 }
 .photoCaption a {
+  display: inline-block;
+  padding-block: 4px;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 .photoCaption details {
   margin-top: 4px;
-  font-size: 11px;
+  font-size: 12px;
+  line-height: 1.7;
 }
 .photoCaption summary {
   display: list-item;

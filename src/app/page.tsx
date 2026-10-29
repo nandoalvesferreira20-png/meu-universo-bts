@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { ArrowRight, Heart, Ticket } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Heart } from "lucide-react";
 import { HeroSection } from "@/components/hero-section";
 import { ExperienceCard, SectionHeader } from "@/components/experience";
 import { experiences, partnerUrl } from "@/data/portal";
+import styles from "./home-tour.module.css";
 export default function Home() {
   return (
     <>
@@ -26,49 +28,30 @@ export default function Home() {
           ))}
         </div>
         <p className="development-note">
-          ● Army Pass, jogos, História do BTS e ARIRANG TOUR: explore cada
-          experiência.
+          ● Army Pass, jogos, Emoji Challenge, História do BTS e ARIRANG TOUR:
+          explore cada experiência.
         </p>
       </section>
       <section className="container tour-section">
-        <div className="tour-art" aria-hidden="true">
-          <div className="ticket">
-            <Ticket size={34} strokeWidth={1} />
-            <span>
-              THE MOMENT
-              <br />
-              BECOMES A<br />
-              <em>MEMORY.</em>
-            </span>
-            <div className="ticket-rule" />
-            <small>ARIRANG TOUR — BRASIL</small>
-          </div>
-          <span className="art-star">✦</span>
-          <span className="tour-art-note">EU ESTIVE AQUI. EU SENTI TUDO.</span>
+        <div className={styles.photograph}>
+          <Image
+            src="/images/army-pass/gallery/arirang/arirang-01.jpg"
+            alt="Os sete integrantes do BTS juntos em uma fotografia de estúdio da era ARIRANG."
+            width={1600}
+            height={1141}
+            sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1200px) 50vw, 600px"
+          />
         </div>
         <div className="tour-copy">
           <span className="eyebrow">ARIRANG TOUR</span>
-          <h2>
-            Alguns momentos
-            <br />
-            merecem ficar
-            <br />
-            <em>para sempre.</em>
-          </h2>
+          <h2>Conheça a ARIRANG TOUR</h2>
           <p>
-            A emoção do primeiro acorde. O brilho dos lightsticks. A voz que se
-            encontra com tantas outras.
-          </p>
-          <p>
-            Um espaço para guardar suas experiências nos shows e cinemas — e
-            reviver tudo em comunidade.
+            Acompanhe a trajetória do BTS pelos palcos do mundo, explore os
+            momentos marcantes da turnê e reviva o retorno histórico do grupo.
           </p>
           <Link className="button button-primary" href="/arirang-tour">
-            Conhecer a galeria <ArrowRight size={17} />
+            Explorar a turnê <ArrowRight size={17} />
           </Link>
-          <span className="small-note">
-            Compartilhamento de fotos disponível em uma próxima fase.
-          </span>
         </div>
       </section>
       <section className="community-section">

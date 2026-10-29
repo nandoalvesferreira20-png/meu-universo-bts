@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { navigation, partnerUrl } from "@/data/portal";
+import { NavigationLink } from "./navigation-link";
 import { MobileNavigation } from "./mobile-navigation";
 export function Brand() {
   return (
@@ -23,9 +24,9 @@ export function Header() {
         </Link>
         <nav className="desktop-navigation" aria-label="Navegação principal">
           {navigation.map((item) => (
-            <Link key={item.href} href={item.href}>
+            <NavigationLink key={item.href} href={item.href}>
               {item.label}
-            </Link>
+            </NavigationLink>
           ))}
         </nav>
         <a
@@ -58,11 +59,11 @@ export function Footer() {
           </div>
           <nav aria-label="Navegação do rodapé">
             {navigation.map((item) => (
-              <Link key={item.href} href={item.href}>
+              <NavigationLink key={item.href} href={item.href}>
                 {item.label}
-              </Link>
+              </NavigationLink>
             ))}
-            <Link href="/sobre">Sobre o projeto</Link>
+            <NavigationLink href="/sobre">Sobre o projeto</NavigationLink>
           </nav>
           <a href={partnerUrl} target="_blank" rel="noreferrer">
             Feito em comunidade

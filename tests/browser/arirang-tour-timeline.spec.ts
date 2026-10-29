@@ -1,5 +1,5 @@
 ﻿import { test, expect } from "@playwright/test";
-import { tourStops } from "../../src/data/arirang-tour";
+import { datedTourStops, tourStops } from "../../src/data/arirang-tour";
 test("timeline: 25 paradas cronológicas, 62 datas, sete meses e capítulo brasileiro", async ({
   page,
 }, info) => {
@@ -25,10 +25,15 @@ test("timeline: 25 paradas cronológicas, 62 datas, sete meses e capítulo brasi
     ).toEqual(stop.dates);
   }
   const brazil = timeline.locator('[data-tour-stop="sao-paulo"]');
-  await expect(brazil).toHaveAttribute("data-status", "upcoming");
-  await expect(brazil).toContainText("PRÓXIMA PARADA");
-  await expect(brazil).toContainText("Em breve, ARMYs 💜");
-  await expect(timeline.locator('[data-status="past"]')).toHaveCount(24);
+  const dated = datedTourStops(new Date());
+  const status = dated.find((stop) => stop.id === "sao-paulo")!.status;
+  await expect(brazil).toHaveAttribute("data-status", status);
+  await expect(brazil).toContainText(
+    status === "upcoming" ? "PRÓXIMA PARADA" : "O CAPÍTULO BRASILEIRO",
+  );
+  await expect(timeline.locator('[data-status="past"]')).toHaveCount(
+    dated.filter((stop) => stop.status === "past").length,
+  );
   await expect(timeline.locator("[data-world-timeline] img")).toHaveCount(0);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "BTS THE COMEBACK LIVE | ARIRANG",

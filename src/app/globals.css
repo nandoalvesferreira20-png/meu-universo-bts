@@ -402,6 +402,8 @@ button:focus-visible {
   }
 }
 .experience-card {
+  display: flex;
+  flex-direction: column;
   background: var(--white);
   border: 1px solid var(--line);
   padding: 28px;
@@ -457,6 +459,7 @@ button:focus-visible {
   font-weight: 600;
 }
 .card-link {
+  margin-top: auto;
   width: 100%;
   padding-top: 16px;
   border-top: 1px solid var(--line);
@@ -1009,4 +1012,12 @@ button:focus-visible {
     animation: none !important;
     transition: none !important;
   }
+}
+
+.site-header nav a[aria-current="page"],
+.site-footer nav a[aria-current="page"] {
+  color: var(--purple);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
 }
